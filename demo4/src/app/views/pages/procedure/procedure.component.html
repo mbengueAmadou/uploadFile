@@ -1,0 +1,68 @@
+<div class="container">
+    
+        <div class="card mb-5">
+            <div class="card-title">
+                Liste des Procédures
+            </div>
+            <button class="btn btn-primary" (click)="openBasicModal(basicModal)">Nouvelle Procedure</button>
+        </div>
+
+<div class="row">
+        <div class="col-md-3" *ngFor="let procedure of procedures">
+            <img src="../../../../assets/images/logoPDF.png" alt="" width="100px" height="100px">
+            <div class="contain" >
+                <p>{{procedure.nomProcedure}}</p>
+            </div>
+           <!--  <button type="button" (click)="onEdit(categorie.idCategorie)" class="btn btn-primary btn-icon">
+                <i class="feather mdi mdi-border-color"></i>
+              </button>&nbsp;&nbsp;
+              <button type="button" (click)="ondelet(categorie.idCategorie)" class="btn btn-danger btn-icon">
+                <i class="feather mdi mdi-cup"></i>
+              </button></td> -->
+        </div>
+        
+
+    </div>
+
+</div>
+<!-- Modal -->
+<ng-template #basicModal let-modal>
+    <form 
+    name="form"
+    (ngSubmit)="f.form.valid "
+    
+    novalidate>
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Ajouter un procedure</h5>
+      <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <label>Nom Document</label>
+      <input
+          type="text"
+          class="form-control"
+          name="nomDocument"
+          required
+          [(ngModel)]="form.nomDocument"
+          #nomDocument="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && nomDocument.errors }"
+        />
+      <label>upload procedure</label>
+      <input
+          type="file"
+          class="form-control"
+          name="nomProcedure"
+          required
+          
+          
+          (change)="selectDocument1($event)"
+          accept="application/pdf"
+          [ngClass]="{ 'is-invalid': f.submitted  }"
+        />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="submit()" (click)=" modal.close('by: save button') ">Enregistrer</button>
+    </div>
+</form>
+  </ng-template>

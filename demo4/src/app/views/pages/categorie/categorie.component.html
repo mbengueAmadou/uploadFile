@@ -1,0 +1,95 @@
+<!--nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink=".">Tables</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data table</li>
+    </ol>
+  </nav>
+  
+  < <div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Simple-datatables</h4>
+          <p class=“text-muted”>Read the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank"> Official Simple-datatables Documentation </a>for a full list of instructions and other options.</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Liste des Catégories</h6>
+          <button class="btn btn-primary" (click)="openBasicModal(basicModal)">Nouvelle Categorie</button>
+          <div class="table-responsive">
+            <table id="dataTableExample" class="table">
+              <thead>
+                <tr>
+                  <th>Numéro Catégorie</th>
+                  <th>Nom Categorie</th>
+                  <th>Date Création</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+               
+                <tr *ngFor="let categorie of categories">
+
+                  <td>{{categorie.idCategorie}}</td>
+                  <td>{{categorie.nomCategorie}}</td>
+                  <td>{{categorie.dateCreationCategorie | date:'dd/MM/yyyy'}}</td>
+                  <td><button type="button" (click)="onEdit(categorie.idCategorie)" class="btn btn-primary btn-icon">
+                    <i class="feather mdi mdi-border-color"></i>
+                  </button>&nbsp;&nbsp;
+                  <button type="button" (click)="ondelet(categorie.idCategorie)" class="btn btn-danger btn-icon">
+                    <i class="feather mdi mdi-cup"></i>
+                  </button></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+<ng-template #basicModal let-modal>
+    <form 
+    name="form"
+    (ngSubmit)="f.form.valid "
+    #f="ngForm"
+    novalidate>
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Ajouter une catégorie</h5>
+      <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <label>Nom Categorie</label>
+      <input
+          type="text"
+          class="form-control"
+          name="nomCategorie"
+          required
+          [(ngModel)]="form.nomCategorie"
+          #nomCategorie="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && nomCategorie.errors }"
+        />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Fermer</button>
+      <button type="button" class="btn btn-primary" (click)="submit()" (click)=" modal.close('by: save button') ">Enregistrer</button>
+    </div>
+</form>
+  </ng-template>
+  <!-- Close result -->
